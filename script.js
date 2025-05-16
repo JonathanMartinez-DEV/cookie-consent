@@ -14,6 +14,10 @@ modalClose.addEventListener("click", () => {
 
 consentForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  const formData = new FormData(consentForm);
+  const name = formData.get("fullName");
+
   modalText.innerHTML = `
   <div class="modal-inner-loading">
     <img src="images/loading.svg" class="loading">
@@ -28,11 +32,13 @@ consentForm.addEventListener("submit", (e) => {
 
   setTimeout(() => {
     modalInner.innerHTML = `
-    <h2>Thanks you sucker! </h2>
+    <h2>Thanks <span class="modal-display-name">${name}</span>, you sucker! </h2>
     <p>We just sold the rights to your eternal soul.</p>
     <div class="idiot-gif">
         <img src="images/pirate.gif">
     </div>
     `;
+
+    modalClose.disabled = false;
   }, 3000);
 });
